@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 739999887}
   - component: {fileID: 739999886}
   m_Layer: 5
-  m_Name: scrollview_text
+  m_Name: scrollview_logs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 780816181}
   - component: {fileID: 780816180}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txt_logs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
