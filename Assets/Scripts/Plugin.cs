@@ -3,7 +3,7 @@ using UnityEngine;
 public class Plugin : MonoBehaviour
 {
 #if UNITY_ANDROID
-    private const string loggerClassName = "com.example.logger2022.mainLogger";
+    private const string loggerClassName = "com.moviles.logger.logger";
 
     private AndroidJavaClass loggerClass;
     private AndroidJavaObject loggerObject;
