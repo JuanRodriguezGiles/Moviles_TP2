@@ -5,8 +5,7 @@ using UnityEngine;
 public class AlertViewCallback : AndroidJavaProxy
 {
     #region PRIVATE_FIELDS
-    private Action<int> alertHandler; 
-
+    private Action<int> alertHandler;
     #endregion
     
     #region CONSTANTS

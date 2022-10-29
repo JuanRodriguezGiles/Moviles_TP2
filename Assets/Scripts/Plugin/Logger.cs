@@ -3,14 +3,11 @@ using System;
 
 using UnityEngine;
 
-public class Plugin : MonoBehaviour
+public class Logger : Singleton<Logger>
 {
     #region PRIVATE_FIELDS
     private AndroidJavaClass loggerClass;
     private AndroidJavaObject loggerObject;
-    
-    private string output;
-    private string stack;
     #endregion
 
     #region CONSTANTS
@@ -18,45 +15,29 @@ public class Plugin : MonoBehaviour
     #endregion
 
     #region UNITY_CALLS
-    void Start()
+    private void Start()
     {
         loggerClass = new AndroidJavaClass(loggerClassName);
         loggerObject = loggerClass.CallStatic<AndroidJavaObject>("GetInstance");
 
         AndroidJavaClass playerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+
         loggerClass.SetStatic("mainActivity", activity);
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ShowAlertDialog(new string[] { "Alert Title", "Alert Message", "Button 1", "Button 2 " }, obj =>
-            {
-                Debug.Log("Local Handler called: " + obj);
-            });
-        }
-    }
-    
-    void OnEnable()
+    private void OnEnable()
     {
         Application.logMessageReceived += HandleLog;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         Application.logMessageReceived -= HandleLog;
     }
     #endregion
 
     #region PUBLIC_METHODS
-    public void ButtonPressed()
-    {
-        Debug.Log("Pepega");
-        //loggerObject.Call("MyLog", "BOTON");
-    }
-
     public void ShowAlertDialog(string[] strings, Action<int> handler = null)
     {
         if (strings.Length < 3)
@@ -65,16 +46,29 @@ public class Plugin : MonoBehaviour
             return;
         }
 
-        loggerObject.Call("ShowAlertView", new object[] { strings, new AlertViewCallback(handler) });
+        loggerObject.Call("ShowAlertView", strings, new AlertViewCallback(handler));
+    }
+
+    public string GetLogs()
+    {
+        return loggerObject.Call<string>("ReadFile");
+    }
+
+    public void ClearLogs()
+    {
+        loggerObject.Call("ClearLogs");
+    }
+
+    public void LogButton(string button)
+    {
+        Debug.Log("PRESSED " + button + " BUTTON");
     }
     #endregion
 
     #region PRIVATE_METHODS
     private void HandleLog(string logString, string stackTrace, LogType type)
     {
-        output = logString;
-        stack = stackTrace;
-        Debug.Log("HANDLING LOG: " + output + " " + stack);
+        loggerObject.Call("MyLog", logString);
     }
     #endregion
 }

@@ -82,7 +82,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.device-simulator": {
-      "version": "file:C:/Users/Juan/Downloads/com.unity.device-simulator-master",
+      "version": "file:../com.unity.device-simulator-master",
       "depth": 0,
       "source": "local",
       "dependencies": {}
