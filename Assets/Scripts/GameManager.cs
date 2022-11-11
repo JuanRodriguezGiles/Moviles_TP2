@@ -4,8 +4,7 @@ public enum SCENES
 {
     MAIN_MENU,
     LOGS,
-    GAMEPLAY,
-    LEADERBOARD
+    GAMEPLAY
 }
 
 class GameManager : Singleton<GameManager>

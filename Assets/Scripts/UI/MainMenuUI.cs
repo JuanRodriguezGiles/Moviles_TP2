@@ -16,6 +16,7 @@ public class MainMenuUI : MonoBehaviour
       playBtn.onClick.AddListener((() =>
       {
          Logger.Instance.LogButton("PLAY");
+         GameManager.Instance.LoadScene(SCENES.GAMEPLAY);
       }));
       creditsBtn.onClick.AddListener((() =>
       {
