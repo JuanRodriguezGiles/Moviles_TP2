@@ -25,10 +25,24 @@ public class GameplayController : MonoBehaviour
         
         pallet.Init(onHitBall);
         lose.Init(onBallFall);
-        
-        gameplayUI.Init(ref onScoreChange);
+
+        gameplayUI.Init(ref onScoreChange, ReStart);
+
+        GameManager.Instance.ToggleInput(true);
     }
 
+    private void ReStart()
+    {
+        score = 0;
+        onScoreChange?.Invoke(score);
+        
+        activeBalls = 0;
+        pallet.Reset();
+        
+        GameManager.Instance.ToggleInput(true);
+        SpawnBall();
+    }
+    
     private void OnHitBall()
     {
         score++;
@@ -56,7 +70,8 @@ public class GameplayController : MonoBehaviour
         Debug.Log("Ball fell");
         if (activeBalls <= 0)
         {
-            gameplayUI.ToggleLosePanel();
+            GameManager.Instance.ToggleInput(false);
+            gameplayUI.ToggleLosePanel(true, score);
             Debug.Log("Game Over");
         }
     }

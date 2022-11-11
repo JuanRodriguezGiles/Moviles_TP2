@@ -13,6 +13,11 @@ public class HitBall : MonoBehaviour
     {
         this.onHitBall = onHitBall;
     }
+
+    public void Reset()
+    {
+        transform.position = new Vector3(0, transform.position.y, 0);
+    }
     
     private void OnCollisionEnter2D(Collision2D col)
     {

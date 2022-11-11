@@ -9,8 +9,17 @@ public enum SCENES
 
 class GameManager : Singleton<GameManager>
 {
+    private bool inputEnabled = true;
+
+    public bool InputEnabled { get => inputEnabled; }
+    
     public void LoadScene(SCENES scene)
     {
         SceneManager.LoadScene((int)scene);
+    }
+
+    public void ToggleInput(bool active)
+    {
+        inputEnabled = active;
     }
 }
