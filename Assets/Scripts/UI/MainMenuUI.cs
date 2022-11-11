@@ -8,6 +8,8 @@ public class MainMenuUI : MonoBehaviour
    [SerializeField] private Button creditsBtn;
    [SerializeField] private Button leaderboardBtn;
    [SerializeField] private Button logsBtn;
+
+   [SerializeField] private Transform creditsHolder;
    #endregion
 
    #region UNITY_CALLS
@@ -21,6 +23,7 @@ public class MainMenuUI : MonoBehaviour
       creditsBtn.onClick.AddListener((() =>
       {
          Logger.Instance.LogButton("CREDITS");
+         creditsHolder.gameObject.SetActive(true);
       }));
       leaderboardBtn.onClick.AddListener((() =>
       {

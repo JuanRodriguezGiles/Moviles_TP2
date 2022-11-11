@@ -26,6 +26,9 @@ TextureImporter:
   - first:
       213: -4590711269936730322
     second: btn_ok
+  - first:
+      213: 2316322214688093249
+    second: holder_6
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -291,6 +294,27 @@ TextureImporter:
       bones: []
       spriteID: e2fe9013c648a40c0800000000000000
       internalID: -4590711269936730322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: holder_6
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 62
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14474d728ca352020800000000000000
+      internalID: 2316322214688093249
       vertices: []
       indices: 
       edges: []
