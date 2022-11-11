@@ -124,6 +124,7 @@ public class GameplayController : MonoBehaviour
         {
             GameManager.Instance.ToggleInput(false);
             GameManager.Instance.money += score;
+            PlayerPrefs.SetInt("Money", GameManager.Instance.money);
             gameplayUI.ToggleLosePanel(true, score);
             Debug.Log("Game Over");
         }

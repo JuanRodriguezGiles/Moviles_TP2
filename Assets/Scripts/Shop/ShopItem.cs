@@ -10,7 +10,6 @@ public class ShopItem : MonoBehaviour
     public string id = string.Empty;
     public int price = 0;
     [SerializeField] private TextMeshProUGUI priceTxt = null;
-    [SerializeField] private Image itemImage = null;
     [SerializeField] private Button button = null;
 
     private void Start()

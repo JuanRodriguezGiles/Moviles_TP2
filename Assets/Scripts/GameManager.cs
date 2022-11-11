@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum SCENES
@@ -12,6 +13,11 @@ class GameManager : Singleton<GameManager>
     private bool inputEnabled = true;
     public bool InputEnabled { get => inputEnabled; }
     public int money = 0;
+
+    private void Start()
+    {
+        money = PlayerPrefs.GetInt("Money", 0);
+    }
     
     public void LoadScene(SCENES scene)
     {

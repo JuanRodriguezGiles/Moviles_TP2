@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using TMPro;
 
 using UnityEngine;
@@ -24,11 +26,20 @@ public class ShopUI : MonoBehaviour
                 {
                     items[i].gameObject.SetActive(false);
                 }
+                else
+                {
+                    items[i].Init(PurchaseItem);
+                }
             }
         }
         else
         {
             shopData = new ShopData();
+            shopData.purchasedIds = new List<string>();
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i].Init(PurchaseItem);
+            }
         }
     }
 
@@ -41,9 +52,10 @@ public class ShopUI : MonoBehaviour
                 if (GameManager.Instance.money >= items[i].price)
                 {
                     GameManager.Instance.money -= items[i].price;
+                    PlayerPrefs.SetInt("Money", GameManager.Instance.money);
                     moneyTxt.text = "$" + GameManager.Instance.money.ToString();
-                    items[i].gameObject.SetActive(false);
                     shopData.purchasedIds.Add(items[i].id);
+                    items[i].gameObject.SetActive(false);
                     PlayerPrefs.SetString("ShopData", JsonUtility.ToJson(shopData));
                 }
             }
