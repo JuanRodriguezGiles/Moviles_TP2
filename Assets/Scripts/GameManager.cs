@@ -1,3 +1,6 @@
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,9 +19,34 @@ class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        PlayGamesPlatform.Activate();
+        Social.localUser.Authenticate(result =>
+        {
+            if (result)
+            {
+                Debug.Log("Login");
+            }
+            else
+            {
+                Debug.Log("Failed login");
+            }
+        });
+
+        PlayGamesPlatform.Instance.Authenticate((status =>
+        {
+            if (status == SignInStatus.Success)
+            {
+                Debug.Log("Login");
+            }
+            else
+            {
+                Debug.Log("Failed login");
+            }
+        }));
+
         money = PlayerPrefs.GetInt("Money", 0);
     }
-    
+
     public void LoadScene(SCENES scene)
     {
         SceneManager.LoadScene((int)scene);

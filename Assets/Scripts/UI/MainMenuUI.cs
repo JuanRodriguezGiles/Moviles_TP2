@@ -1,3 +1,5 @@
+using GooglePlayGames;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +31,7 @@ public class MainMenuUI : MonoBehaviour
       }));
       leaderboardBtn.onClick.AddListener((() =>
       {
+         PlayGamesPlatform.Instance.ShowLeaderboardUI(GPGSIds.leaderboard_top10);
          Logger.Instance.LogButton("LEADERBOARD");
       }));
       logsBtn.onClick.AddListener((() =>

@@ -2,6 +2,9 @@ using System;
 
 using UnityEngine;
 
+using GooglePlayGames;
+
+using UnityEngine.SocialPlatforms;
 
 public class GameplayController : MonoBehaviour
 {
@@ -43,10 +46,10 @@ public class GameplayController : MonoBehaviour
     private void StartGame()
     {
         GameManager.Instance.ToggleInput(true);
-        
+
         SpawnBall();
     }
-    
+
     private void ReStart()
     {
         score = 0;
@@ -127,6 +130,8 @@ public class GameplayController : MonoBehaviour
             PlayerPrefs.SetInt("Money", GameManager.Instance.money);
             gameplayUI.ToggleLosePanel(true, score);
             Debug.Log("Game Over");
+
+            Social.ReportScore(score, GPGSIds.leaderboard_top10, (bool success) => { Debug.Log(success ? "Updated leaderboard" : "Failed to update leaderboard"); });
         }
     }
 }
