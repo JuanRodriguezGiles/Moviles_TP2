@@ -10,8 +10,8 @@ public enum SCENES
 class GameManager : Singleton<GameManager>
 {
     private bool inputEnabled = true;
-
     public bool InputEnabled { get => inputEnabled; }
+    public int money = 0;
     
     public void LoadScene(SCENES scene)
     {

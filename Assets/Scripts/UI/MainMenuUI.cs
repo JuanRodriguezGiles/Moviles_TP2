@@ -8,8 +8,10 @@ public class MainMenuUI : MonoBehaviour
    [SerializeField] private Button creditsBtn;
    [SerializeField] private Button leaderboardBtn;
    [SerializeField] private Button logsBtn;
+   [SerializeField] private Button shopBtn;
 
    [SerializeField] private Transform creditsHolder;
+   [SerializeField] private ShopUI shopUI;
    #endregion
 
    #region UNITY_CALLS
@@ -33,6 +35,12 @@ public class MainMenuUI : MonoBehaviour
       {
          Logger.Instance.LogButton("LOGS");
          GameManager.Instance.LoadScene(SCENES.LOGS);
+      }));
+      shopBtn.onClick.AddListener((() =>
+      {
+         Logger.Instance.LogButton("SHOP");
+         shopUI.gameObject.SetActive(true);
+         shopUI.Init();
       }));
    }
    #endregion
