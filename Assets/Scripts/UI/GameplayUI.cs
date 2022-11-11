@@ -10,10 +10,12 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreTxt;
     [SerializeField] private TextMeshProUGUI loseScoreTxt;
     [SerializeField] private Transform loseHolder;
+    [SerializeField] private Transform tutorialHolder;
     [SerializeField] private Button mainMenuBtn;
     [SerializeField] private Button playAgainBtn;
+    [SerializeField] private Button startBtn;
 
-    public void Init(ref Action<int> onUpdateScore, Action reStart)
+    public void Init(ref Action<int> onUpdateScore, Action reStart,Action start)
     {
         onUpdateScore += UpdateScore;
         mainMenuBtn.onClick.AddListener(LoadMainMenu);
@@ -21,6 +23,11 @@ public class GameplayUI : MonoBehaviour
         {
             ToggleLosePanel(false);
             reStart?.Invoke();
+        }));
+        startBtn.onClick.AddListener((() =>
+        {
+            tutorialHolder.gameObject.SetActive(false);
+            start?.Invoke();
         }));
     }
 

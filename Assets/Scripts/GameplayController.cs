@@ -21,13 +21,15 @@ public class GameplayController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.ToggleInput(false);
+
         if (PlayerPrefs.HasKey("ShopData"))
         {
             string json = PlayerPrefs.GetString("ShopData");
             shopData = JsonUtility.FromJson<ShopData>(json);
         }
 
-        activeBalls = 1;
+        activeBalls = 0;
 
         onHitBall += OnHitBall;
         onBallFall += OnBallFall;
@@ -35,11 +37,16 @@ public class GameplayController : MonoBehaviour
         pallet.Init(onHitBall);
         lose.Init(onBallFall);
 
-        gameplayUI.Init(ref onScoreChange, ReStart);
-
-        GameManager.Instance.ToggleInput(true);
+        gameplayUI.Init(ref onScoreChange, ReStart, StartGame);
     }
 
+    private void StartGame()
+    {
+        GameManager.Instance.ToggleInput(true);
+        
+        SpawnBall();
+    }
+    
     private void ReStart()
     {
         score = 0;
