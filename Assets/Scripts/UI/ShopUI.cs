@@ -57,6 +57,21 @@ public class ShopUI : MonoBehaviour
                     shopData.purchasedIds.Add(items[i].id);
                     items[i].gameObject.SetActive(false);
                     PlayerPrefs.SetString("ShopData", JsonUtility.ToJson(shopData));
+
+                    if (shopData.purchasedIds.Count == 1)
+                    {
+                        Social.ReportProgress(GPGSIds.achievement_ballin, 100.0f, success =>
+                        {
+                            if (success)
+                            {
+                                Debug.Log("Unlocked achievement");
+                            }
+                            else
+                            {
+                                Debug.Log("Failed to unlock achievement");
+                            }
+                        });
+                    }
                 }
             }
         }

@@ -24,7 +24,12 @@
 
 public static class GPGSIds
 {
+        public const string achievement_shopping_spree = "CgkIsq-LrcYaEAIQBg"; // <GPGSID>
+        public const string achievement_bounce_intermediate = "CgkIsq-LrcYaEAIQAw"; // <GPGSID>
         public const string leaderboard_top10 = "CgkIsq-LrcYaEAIQAQ"; // <GPGSID>
+        public const string achievement_ballin = "CgkIsq-LrcYaEAIQBQ"; // <GPGSID>
+        public const string achievement_bounce_expert = "CgkIsq-LrcYaEAIQBA"; // <GPGSID>
+        public const string achievement_bounce_beginner = "CgkIsq-LrcYaEAIQAg"; // <GPGSID>
 
 }
 

@@ -132,6 +132,43 @@ public class GameplayController : MonoBehaviour
             Debug.Log("Game Over");
 
             Social.ReportScore(score, GPGSIds.leaderboard_top10, (bool success) => { Debug.Log(success ? "Updated leaderboard" : "Failed to update leaderboard"); });
+            
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_bounce_beginner, score, success =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Incremented achievement");
+                    }
+                    else
+                    {
+                        Debug.Log("Failed to increment achievement");
+                    }
+                });
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_bounce_intermediate, score, success =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Incremented achievement");
+                    }
+                    else
+                    {
+                        Debug.Log("Failed to increment achievement");
+                    }
+                });
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_bounce_expert, score, success =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Incremented achievement");
+                    }
+                    else
+                    {
+                        Debug.Log("Failed to increment achievement");
+                    }
+                });
         }
     }
 }
