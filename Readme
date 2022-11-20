@@ -1,1 +1,6 @@
+Patrones de diseño:
 
+1. Mediator: el patron mediator se usa principalmente en el GameplayController, por ejemplo para reportar cuando se le pega a una pelota o se cae una. De esta forma se
+quita responsabilidad a los componentes individuales que solo se ocupan de reportar.
+
+2. Strategy: este patron se utiliza en la logica del pallet, donde se separa la logica en diferentes scripts. Uno para el movimiento y otro para el impacto con las bolas.
