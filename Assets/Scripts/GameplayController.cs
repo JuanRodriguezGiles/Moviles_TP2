@@ -86,31 +86,31 @@ public class GameplayController : MonoBehaviour
             switch (id)
             {
                 case "black":
-                    ballComp.Init(Color.black);
+                    ballComp.Init(Color.black, onBallFall);
                     break;
                 case "blue":
-                    ballComp.Init(Color.blue);
+                    ballComp.Init(Color.blue, onBallFall);
                     break;
                 case "cyan":
-                    ballComp.Init(Color.cyan);
+                    ballComp.Init(Color.cyan, onBallFall);
                     break;
                 case "green":
-                    ballComp.Init(Color.green);
+                    ballComp.Init(Color.green, onBallFall);
                     break;
                 case "magenta":
-                    ballComp.Init(Color.magenta);
+                    ballComp.Init(Color.magenta, onBallFall);
                     break;
                 case "red":
-                    ballComp.Init(Color.red);
+                    ballComp.Init(Color.red, onBallFall);
                     break;
                 case "yellow":
-                    ballComp.Init(Color.yellow);
+                    ballComp.Init(Color.yellow, onBallFall);
                     break;
             }
         }
         else
         {
-            ballComp.Init(Color.white);
+            ballComp.Init(Color.white, onBallFall);
         }
 
         activeBalls++;
@@ -132,7 +132,19 @@ public class GameplayController : MonoBehaviour
             Debug.Log("Game Over");
 
             Social.ReportScore(score, GPGSIds.leaderboard_top10, (bool success) => { Debug.Log(success ? "Updated leaderboard" : "Failed to update leaderboard"); });
-            
+
+            PlayGamesPlatform.Instance.IncrementAchievement(
+                GPGSIds.achievement_first_bounces, score, success =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Incremented achievement");
+                    }
+                    else
+                    {
+                        Debug.Log("Failed to increment achievement");
+                    }
+                });
             PlayGamesPlatform.Instance.IncrementAchievement(
                 GPGSIds.achievement_bounce_beginner, score, success =>
                 {

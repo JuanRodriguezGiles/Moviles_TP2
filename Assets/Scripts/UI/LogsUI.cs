@@ -18,6 +18,7 @@ public class LogsUI : MonoBehaviour
     #region UNITY_CALLS
     private void Start()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
         logsTxt.text = Logger.Instance.GetLogs();
 
         clearLogsBtn.onClick.AddListener((() =>
@@ -33,7 +34,7 @@ public class LogsUI : MonoBehaviour
                 }
             });
         }));
-
+#endif
         mainMenuBtn.onClick.AddListener((() =>
         {
             Logger.Instance.LogButton("MAIN MENU");

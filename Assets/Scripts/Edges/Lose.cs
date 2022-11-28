@@ -13,6 +13,7 @@ public class Lose : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
+        Destroy(col.gameObject);
         onBallFall?.Invoke();
     }
 }

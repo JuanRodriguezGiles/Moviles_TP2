@@ -72,6 +72,21 @@ public class ShopUI : MonoBehaviour
                             }
                         });
                     }
+
+                    if (shopData.purchasedIds.Count == items.Length)
+                    {
+                        Social.ReportProgress(GPGSIds.achievement_shopping_spree, 100.0f, success =>
+                        {
+                            if (success)
+                            {
+                                Debug.Log("Unlocked achievement");
+                            }
+                            else
+                            {
+                                Debug.Log("Failed to unlock achievement");
+                            }
+                        });
+                    }
                 }
             }
         }

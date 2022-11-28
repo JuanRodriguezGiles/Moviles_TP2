@@ -20,23 +20,23 @@ class GameManager : Singleton<GameManager>
     private void Start()
     {
         PlayGamesPlatform.Activate();
-        Social.localUser.Authenticate(result =>
-        {
-            if (result)
-            {
-                Debug.Log("Login");
-            }
-            else
-            {
-                Debug.Log("Failed login");
-            }
-        });
-
+        
         PlayGamesPlatform.Instance.Authenticate((status =>
         {
             if (status == SignInStatus.Success)
             {
                 Debug.Log("Login");
+                Social.ReportProgress(GPGSIds.achievement_welcome, 100.0f, success =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Unlocked achievement");
+                    }
+                    else
+                    {
+                        Debug.Log("Failed to unlock achievement");
+                    }
+                });
             }
             else
             {

@@ -17,6 +17,7 @@ public class Logger : Singleton<Logger>
     #region UNITY_CALLS
     private void Start()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
         loggerClass = new AndroidJavaClass(loggerClassName);
         loggerObject = loggerClass.CallStatic<AndroidJavaObject>("GetInstance");
 
@@ -24,6 +25,7 @@ public class Logger : Singleton<Logger>
         AndroidJavaObject activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
 
         loggerClass.SetStatic("mainActivity", activity);
+#endif
     }
 
     private void OnEnable()
@@ -68,7 +70,11 @@ public class Logger : Singleton<Logger>
     #region PRIVATE_METHODS
     private void HandleLog(string logString, string stackTrace, LogType type)
     {
-        loggerObject.Call("MyLog", logString);
+#if UNITY_ANDROID && !UNITY_EDITOR
+         loggerObject.Call("MyLog", logString);
+#else
+        Debug.Log("Logger not active in editor");
+#endif
     }
     #endregion
 }
