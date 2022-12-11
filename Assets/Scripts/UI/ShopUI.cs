@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using Facebook.Unity;
+
 using TMPro;
 
 using UnityEngine;
@@ -87,6 +89,10 @@ public class ShopUI : MonoBehaviour
                             }
                         });
                     }
+                    
+                    var softPurchaseParameters = new Dictionary<string, object>();
+                    softPurchaseParameters["mygame_purchased_item"] = items[i];
+                    FB.LogAppEvent(Facebook.Unity.AppEventName.SpentCredits, (float)items[i].price, softPurchaseParameters);
                 }
             }
         }

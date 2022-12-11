@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+
+using Facebook.Unity;
+
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 
@@ -31,6 +36,7 @@ class GameManager : Singleton<GameManager>
                     if (success)
                     {
                         Debug.Log("Unlocked achievement");
+                        
                     }
                     else
                     {
@@ -40,11 +46,31 @@ class GameManager : Singleton<GameManager>
             }
             else
             {
-                Debug.Log("Failed login");
+                Debug.Log("Failed gp login");
             }
         }));
 
+        if (!FB.IsInitialized)
+        {
+            FB.Init(onInitComplete: () =>
+            {
+                if (FB.IsInitialized)
+                {
+                    FB.ActivateApp();
+                }
+                else
+                {
+                    Debug.Log("Failed to init FB");
+                }
+            });
+        }
+        else
+        {
+            FB.ActivateApp();
+        }
+
         money = PlayerPrefs.GetInt("Money", 0);
+        money = 100;
     }
 
     public void LoadScene(SCENES scene)
@@ -55,5 +81,55 @@ class GameManager : Singleton<GameManager>
     public void ToggleInput(bool active)
     {
         inputEnabled = active;
+    }
+
+    public void FBLogin(Action onLogin)
+    {
+        List<string> permissions = new List<string>();
+
+        permissions.Add("public_profile");
+
+        permissions.Add("user_friends");
+
+        FB.LogInWithReadPermissions(permissions, result =>
+        {
+            if (result.Error != null)
+            {
+                Debug.Log(result.Error);
+            }
+            else
+            {
+                if (FB.IsLoggedIn)
+                {
+                    Debug.Log("Logged in!");
+                    onLogin?.Invoke();
+                }
+                else
+                {
+                    Debug.Log("Failed login!");
+                }
+            }
+        });
+    }
+
+    public void FBShare()
+    {
+        FB.ShareLink(new Uri("https://developers.facebook.com/"), callback: result =>
+        {
+            if (result.Cancelled || !String.IsNullOrEmpty(result.Error))
+            {
+                Debug.Log("ShareLink Error: " + result.Error);
+            }
+            else if (!String.IsNullOrEmpty(result.PostId))
+            {
+                // Print post identifier of the shared content
+                Debug.Log(result.PostId);
+            }
+            else
+            {
+                // Share succeeded without postID
+                Debug.Log("ShareLink success!");
+            }
+        });
     }
 }

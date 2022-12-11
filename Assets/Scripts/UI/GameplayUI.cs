@@ -14,6 +14,7 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button mainMenuBtn;
     [SerializeField] private Button playAgainBtn;
     [SerializeField] private Button startBtn;
+    [SerializeField] private Button shareBtn;
 
     public void Init(ref Action<int> onUpdateScore, Action reStart,Action start)
     {
@@ -28,6 +29,10 @@ public class GameplayUI : MonoBehaviour
         {
             tutorialHolder.gameObject.SetActive(false);
             start?.Invoke();
+        }));
+        shareBtn.onClick.AddListener((() =>
+        {
+            GameManager.Instance.FBShare();
         }));
     }
 
