@@ -16,6 +16,8 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button startBtn;
     [SerializeField] private Button shareBtn;
 
+    private int score = 0;
+    
     public void Init(ref Action<int> onUpdateScore, Action reStart,Action start)
     {
         onUpdateScore += UpdateScore;
@@ -32,12 +34,13 @@ public class GameplayUI : MonoBehaviour
         }));
         shareBtn.onClick.AddListener((() =>
         {
-            GameManager.Instance.FBShare();
+            GameManager.Instance.FBShare(score);
         }));
     }
 
     public void ToggleLosePanel(bool active, int score = 0)
     {
+        this.score = score;
         if (active)
         {
             loseScoreTxt.text = "SCORE " + score;

@@ -25,7 +25,7 @@ class GameManager : Singleton<GameManager>
     private void Start()
     {
         PlayGamesPlatform.Activate();
-        
+
         PlayGamesPlatform.Instance.Authenticate((status =>
         {
             if (status == SignInStatus.Success)
@@ -36,7 +36,6 @@ class GameManager : Singleton<GameManager>
                     if (success)
                     {
                         Debug.Log("Unlocked achievement");
-                        
                     }
                     else
                     {
@@ -112,9 +111,9 @@ class GameManager : Singleton<GameManager>
         });
     }
 
-    public void FBShare()
+    public void FBShare(int score)
     {
-        FB.ShareLink(new Uri("https://developers.facebook.com/"), callback: result =>
+        FB.ShareLink(new Uri("https://imgur.com/a/BIOl8XZ/"), contentTitle: "New Score!", contentDescription: "I just got a new score of " + score, callback: result =>
         {
             if (result.Cancelled || !String.IsNullOrEmpty(result.Error))
             {

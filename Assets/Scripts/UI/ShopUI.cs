@@ -91,7 +91,7 @@ public class ShopUI : MonoBehaviour
                     }
                     
                     var softPurchaseParameters = new Dictionary<string, object>();
-                    softPurchaseParameters["mygame_purchased_item"] = items[i];
+                    softPurchaseParameters["BallBouncer_purchased_item"] = items[i];
                     FB.LogAppEvent(Facebook.Unity.AppEventName.SpentCredits, (float)items[i].price, softPurchaseParameters);
                 }
             }
